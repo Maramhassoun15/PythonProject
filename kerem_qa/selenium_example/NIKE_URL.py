@@ -2,17 +2,16 @@ import time
 from time import sleep
 
 from selenium.webdriver import Keys
+from selenium.webdriver.common import by
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium import webdriver
 
-print("Test start")
-service = ChromeService(executable_path=ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+from kerem_qa.selenium_example.seleniumBaseDalya import seleniumBaseDalya
 
-driver.maximize_window()
-driver.implicitly_wait(10)
+base = seleniumBaseDalya()
+driver = base.selenium_start()
 
 driver.get("https://www.nike.com/il/")
 driver.find_element(By.PARTIAL_LINK_TEXT,"Find").click()
@@ -25,4 +24,7 @@ if (url == "https://www.nike.com/il/retail"):
 
 else:
     print("Test FAILED -URL as expected")
+
+driver.close()
+
 
